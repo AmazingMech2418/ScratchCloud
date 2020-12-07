@@ -66,3 +66,8 @@ const {Session, Cloud} = require('scratchcloud');
   clearInterval(interval);
 })();
 ```
+
+
+
+## Other Information
+You can use the `cloud.get(variableName)` to get the value of a cloud variable by name.
