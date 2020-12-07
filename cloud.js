@@ -62,6 +62,9 @@ class Cloud {
     this._send('set', {name:name,value:val});
     this.vars[name] = val;
   }
+  get(name) {
+    return this.vars[name] = val;
+  }
   waitUntil(target, targetVal) {
     return new Promise((resolve, reject) => {
       this.on('set', (name, val) => {
