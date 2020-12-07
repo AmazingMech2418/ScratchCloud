@@ -1,19 +1,27 @@
 {
-  "name": "ScratchCloud",
+  "name": "scratchcloud",
   "version": "1.0.0",
-  "description": "",
+  "description": "A powerful Node.js library for Scratch cloud manipulation",
   "main": "index.js",
   "dependencies": {
     "node-fetch": "^2.6.1",
-    "prompt": "^1.0.0",
-    "scratch-api": "^1.1.11",
     "ws": "^7.4.1"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmazingMech2418/ScratchCloud.git"
+  },
+  "keywords": [
+    "Scratch"
+  ],
+  "author": "AmazingMech2418",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AmazingMech2418/ScratchCloud/issues"
+  },
+  "homepage": "https://github.com/AmazingMech2418/ScratchCloud#readme"
 }
