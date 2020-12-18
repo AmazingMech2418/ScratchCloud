@@ -63,7 +63,7 @@ class Cloud {
     this.vars[name] = val;
   }
   get(name) {
-    return this.vars[name] = val;
+    return this.vars[name];
   }
   waitUntil(target, targetVal) {
     return new Promise((resolve, reject) => {
