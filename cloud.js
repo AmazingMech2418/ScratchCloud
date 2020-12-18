@@ -71,6 +71,7 @@ class Cloud {
         while(1) {
           if(+this.vars[target] == +targetVal) break;
         }
+        resolve();
       };
       listenerCallback();
     });
