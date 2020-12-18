@@ -3,6 +3,7 @@ const events = require('events');
 
 class Cloud {
   constructor(user, id, callback) {
+    this.waits = [];
     this.user = user;
     this.project = ''+id;
     this.vars = {};
@@ -44,7 +45,17 @@ class Cloud {
         } catch(e){return;}
       }
       stream = last;
-    })
+    });
+
+    this.on('set', (name, value) => {
+      for(let j in self.waits) {
+        let i = self.waits[j];
+        if(name == i[0] && +value == +i[1]) {
+          i[2]();
+          self.waits.splice(j, 1);
+        }
+      }
+    });
   }
   _send(method, options) {
     const data = JSON.stringify(Object.assign({user:this.user.username,project_id:this.project,method:method}, options)) + '\n';
@@ -67,13 +78,7 @@ class Cloud {
   }
   waitUntil(target, targetVal) {
     return new Promise((resolve, reject) => {
-      let listenerCallback = async () => {
-        while(1) {
-          if(+this.vars[target] == +targetVal) break;
-        }
-        resolve();
-      };
-      listenerCallback();
+      this.waits.push([target, targetVal, resolve]);
     });
   }
 }
