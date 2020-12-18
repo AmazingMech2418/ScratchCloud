@@ -67,15 +67,12 @@ class Cloud {
   }
   waitUntil(target, targetVal) {
     return new Promise((resolve, reject) => {
-      let listenerCallback =  (name, val) => {
-        if(name == target && +val == +targetVal) {
-          this.eventEmitter.removeEventListener('set', listenerCallback);
-          this.eventEmitter.removeEventListener('setByServer', listenerCallback);
-          resolve();
+      let listenerCallback = async () => {
+        while(1) {
+          if(+this.vars[target] == +targetVal) break;
         }
       };
-      this.on('set', listenerCallback);
-      this.on('setByServer', listenerCallback);
+      listenerCallback();
     });
   }
 }
