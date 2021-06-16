@@ -27,7 +27,7 @@ const session = new Session(process.env.USERNAME, process.env.PASSWORD, function
     // Repeat every second
     setInterval(()=>{
       // Set cloud variable to random number 1 to 10
-      c.set('☁ cloud', ''+Math.round(Math.random()*10));
+      c.set('cloud', ''+Math.round(Math.random()*10));
     }, 1000);
 
     // On change of cloud variable (not including by your Node program), display change
@@ -53,7 +53,7 @@ const {Session, Cloud} = require('scratchcloud');
   // Repeat every second
   let interval = setInterval(()=>{
     // Set cloud variable to random number 1 to 10
-    cloud.set('☁ cloud', ''+Math.round(Math.random()*10));
+    cloud.set('cloud', ''+Math.round(Math.random()*10));
   }, 1000);
   // On cloud variable change, log the change
   cloud.on('set', (name, value) => {
@@ -61,7 +61,7 @@ const {Session, Cloud} = require('scratchcloud');
   })
 
   // Wait until cloud variable is 10
-  await cloud.waitUntil('☁ cloud', 10);
+  await cloud.waitUntil('cloud', 10);
   // Clear interval for setting cloud variable
   clearInterval(interval);
 })();
