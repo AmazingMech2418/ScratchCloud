@@ -16,21 +16,30 @@ const cookie = {
 
 class Session {
   constructor(username = process.env.USERNAME, password = process.env.PASSWORD, callback) {
+    if(!process.env.TOKEN && !this.token) {
+      this.getCSRFToken(() => {
+        construct(username, password, callback);
+      });
+    } else {
+      construct(username, password, callback);
+    }
+  }
+  
+  construct(username, password, callback) {
     let self = this;
     fetch('https://scratch.mit.edu/accounts/login/', {
       method: "POST",
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
         'referer': 'https://scratch.mit.edu',
-        'X-CSRFToken': process.env.TOKEN || 'a',
-        'Cookie': `scratchcsrftoken=${process.env.TOKEN || 'a'}; scratchlanguage=en;`,
-        
-    "accept": "application/json",
-    "accept-language": "en-US,en;q=0.9",
-    "content-type": "application/json",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-origin",
+        'X-CSRFToken': self.token || process.env.TOKEN || 'a',
+        'Cookie': `scratchcsrftoken=${self.token || process.env.TOKEN || 'a'}; scratchlanguage=en;`,
+        "accept": "application/json",
+        "accept-language": "en-US,en;q=0.9",
+        "content-type": "application/json",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin",
       },
       body: JSON.stringify({
         username: username,
@@ -55,6 +64,20 @@ class Session {
         self.username = d[0].username;
         callback(this);
       });
+  }
+  
+  getCSRFToken(callback) {
+    const self = this;
+    fetch("https://scratch.mit.edu/csrf_token/").then(r=>{
+      let arr = Array.from(r.headers.get('set-cookie').split(', '));
+      arr = arr.map(cookie.parse);
+      let obj = {};
+      for (let i of arr)
+        for (let j in i)
+          obj[j] = i[j];
+      self.token = obj.scratchcsrftoken.split('"').join('');
+      callback();
+    }
   }
 }
 Session.createAsync = (username = process.env.USERNAME, password = process.env.PASSWORD) => {
