@@ -70,7 +70,7 @@ class Cloud {
   }
   set(name, val) {
     this.eventEmitter.emit("setByServer", name, val);
-  this._send('set', {name:name.startsWith('☁ ')?name:'☁ '+name,value:val});
+    this._send('set', {name:name.startsWith('☁ ')?name:'☁ '+name,value:val});
     this.vars[name] = val;
   }
   get(name) {
