@@ -70,15 +70,15 @@ class Cloud {
   }
   set(name, val) {
     this.eventEmitter.emit("setByServer", name, val);
-    this._send('set', {name:name,value:val});
+  this._send('set', {name:name.startsWith('☁ ')?name:'☁ '+name,value:val});
     this.vars[name] = val;
   }
   get(name) {
-    return this.vars[name];
+    return this.vars[name.startsWith('☁ ')?name: '☁ '+name];
   }
   waitUntil(target, targetVal) {
     return new Promise((resolve, reject) => {
-      this.waits.push([target, targetVal, resolve]);
+      this.waits.push([target.startsWith('☁ ')?target: '☁ '+target, targetVal, resolve]);
     });
   }
 }
