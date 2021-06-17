@@ -1,6 +1,6 @@
 {
   "name": "scratchcloud",
-  "version": "1.1.1",
+  "version": "1.1.0",
   "description": "A powerful Node.js library for Scratch cloud manipulation",
   "main": "index.js",
   "dependencies": {
