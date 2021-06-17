@@ -69,10 +69,19 @@ class Cloud {
     this.conn.close();
   }
   set(name, val) {
-    this.eventEmitter.emit("setByServer", name, val);
-    this._send('set', {name:name.startsWith('☁ ')?name:'☁ '+name,value:val});
-    this.vars[name] = val;
+    this.eventEmitter.emit("setByServer", name.startsWith('☁ ')?name:'☁ '+name, ""+val);
+    this._send('set', {name:name.startsWith('☁ ')?name:'☁ '+name,value:""+val});
+    this.vars[name.startsWith('☁ ')?name:'☁ '+name] = ""+val;
   }
+  
+  changeBy(name, amount) {
+    const original = this.get(name);
+    if(!original && +original !== 0) {
+      throw new Error("Cannot modify non-existent variable. If this variable does exist, wait until it is already set.");
+    }
+    this.set(name, +original + amount);
+  }
+  
   get(name) {
     return this.vars[name.startsWith('☁ ')?name: '☁ '+name];
   }
