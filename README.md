@@ -72,4 +72,6 @@ const {Session, Cloud} = require('scratchcloud');
 ## Other Information
 You can use the `cloud.get(variableName)` to get the value of a cloud variable by name.
 
+Use `cloud.vars` to get all the names and values of all the cloud variables in a project. All returned variables have the cloud symbol in front of them.
+
 Also, note that you can use the cloud symbol in your variable names, but you do not have to.
