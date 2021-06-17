@@ -50,7 +50,7 @@ class Cloud {
     this.on('set', (name, value) => {
       for(let j in self.waits) {
         let i = self.waits[j];
-        if(name == i[0] && i[1](i[0])) {
+        if(name == i[0] && i[1](value)) {
           i[2]();
           self.waits.splice(j, 1);
         }
