@@ -79,7 +79,7 @@ class Cloud {
     if(!original && +original !== 0) {
       throw new Error("Cannot modify non-existent variable. If this variable does exist, wait until it is already set.");
     }
-    this.set(name, +original + 1);
+    this.set(name, +original + amount);
   }
   
   get(name) {
