@@ -50,7 +50,7 @@ class Cloud {
     this.on('set', (name, value) => {
       for(let j in self.waits) {
         let i = self.waits[j];
-        if(name == i[0] && +value == +i[1]) {
+        if(name == i[0] && i[1](i[0])) {
           i[2]();
           self.waits.splice(j, 1);
         }
@@ -85,9 +85,14 @@ class Cloud {
   get(name) {
     return this.vars[name.startsWith('☁ ')?name: '☁ '+name];
   }
-  waitUntil(target, targetVal) {
+  
+  waitUntil(target, targetValOrFn) {
+    let targetFn = targetValOrFn;
+    if(typeof targetValOrFn != "function") {
+      targetFn = val => +val == +targetValOrFn;
+    }
     return new Promise((resolve, reject) => {
-      this.waits.push([target.startsWith('☁ ')?target: '☁ '+target, targetVal, resolve]);
+      this.waits.push([target.startsWith('☁ ')?target: '☁ '+target, targetFn, resolve]);
     });
   }
 }
