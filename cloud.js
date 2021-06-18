@@ -95,6 +95,16 @@ class Cloud {
       this.waits.push([target.startsWith('☁ ')?target: '☁ '+target, targetFn, resolve]);
     });
   }
+  
+  onload(target, callback) {
+    if(!callback) {
+      return new Promise((resolve, reject) => {
+        this.waits.push([target.startsWith('☁ ')?target: '☁ '+target, ((val) => val != undefined), resolve]);
+      });
+    } else {
+      this.waits.push([target.startsWith('☁ ')?target: '☁ '+target, ((val) => val != undefined), callback]);      
+    }
+  }
 }
 
 Cloud.createAsync = (user, id) => {
