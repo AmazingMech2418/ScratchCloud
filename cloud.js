@@ -27,7 +27,7 @@ class Cloud {
         self._send(i);
       }
       self.attempts = [];
-      callback();
+      setTimeout(function() { callback() }, 500); 
     });
 
     let stream = '';
@@ -96,15 +96,6 @@ class Cloud {
     });
   }
   
-  onload(target, callback) {
-    if(!callback) {
-      return new Promise((resolve, reject) => {
-        this.waits.push([target.startsWith('☁ ')?target: '☁ '+target, ((val) => val != undefined), resolve]);
-      });
-    } else {
-      this.waits.push([target.startsWith('☁ ')?target: '☁ '+target, ((val) => val != undefined), callback]);      
-    }
-  }
 }
 
 Cloud.createAsync = (user, id) => {
