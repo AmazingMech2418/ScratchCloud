@@ -27,7 +27,7 @@ class Cloud {
         self._send(i);
       }
       self.attempts = [];
-      setTimeout(function() { callback() }, 500); 
+      setTimeout(function() { callback(); }, 500); 
     });
 
     let stream = '';
