@@ -60,7 +60,7 @@ const session = new Session(process.env.USERNAME, process.env.PASSWORD, function
 ### Async
 ```js
 // Require module
-const {Session, Cloud} = require('scratchcloud');
+const { Session, Cloud } = require('scratchcloud');
 
 // Async function to enable async/await
 (async () => {
