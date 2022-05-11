@@ -10,7 +10,7 @@ ScratchCloud is a new, powerful, Scratch cloud data API for Node.js written by A
 - Ability to wait until a target variable is less than, greater than, not equal, or equal to a value
 - Onload function to wait for a cloud variable to be loaded, for stability
 - Built in functions to mimic Scratch's cloud variable functions
-- Shows cloud changes that are NOT from your node program
+- Shows cloud changes that are not from your NodeJS program
 
 ## Examples
 
@@ -20,7 +20,7 @@ ScratchCloud is a new, powerful, Scratch cloud data API for Node.js written by A
 const { Session, Cloud } = require('scratchcloud');
 
 // Create user session
-const project = 458027255 // Project ID
+const project = 458027255; // Project ID
 const session = new Session(process.env.USERNAME, process.env.PASSWORD, function(user) {
   // Create cloud session
   const cloud = new Cloud(user, project, function(error, cloud) {
@@ -66,7 +66,7 @@ const { Session, Cloud } = require('scratchcloud');
 (async () => {
   // Create user session
   const user = await Session.createAsync(process.env.USERNAME, process.env.PASSWORD);
-  const project = 458027255 // Project ID
+  const project = 458027255; // Project ID
   
   // Create cloud session
   const cloud = await Cloud.createAsync(user, project);
@@ -90,7 +90,7 @@ const { Session, Cloud } = require('scratchcloud');
   await cloud.waitUntil("cloud", val => val !== 6); // Cloud variable isn't set to 6
   
   // Change cloud variable by 5
-  await cloud.changeBy("cloud", 5);
+  cloud.changeBy("cloud", 5);
   
   // Clear interval for setting cloud variable
   clearInterval(interval);
@@ -100,6 +100,8 @@ const { Session, Cloud } = require('scratchcloud');
 
 
 ## Other Information
+
+You can use the `cloud.get(variableName)` to get the value of a cloud variable by name.
 
 Use `cloud.vars` to get all the names and values of all the cloud variables in a project. All returned variables have the cloud symbol in front of them.
 
